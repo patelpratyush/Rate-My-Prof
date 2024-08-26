@@ -13,6 +13,7 @@ export default function Home() {
   ]);
   const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(false);
+  const [link, setLink] = useState("");
   const messagesEndRef = useRef(null);
 
   const sendMessage = async () => {
@@ -69,6 +70,47 @@ export default function Home() {
     }
   };
 
+  const submitLink = async () => {
+    if (link.trim() === "") return; // Prevent sending empty links
+    setLoading(true);
+
+    try {
+      const response = await fetch("/api/scrape", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ data: link }),
+      });
+
+      const data = await response.json();
+      if (response.ok) {
+        setMessages((messages) => [
+          ...messages,
+          { role: "assistant", content: "Professor data successfully added." },
+        ]);
+      } else {
+        setMessages((messages) => [
+          ...messages,
+          { role: "assistant", content: data.error || "Failed to add data." },
+        ]);
+      }
+    } catch (error) {
+      console.error("Error submitting link:", error);
+      setMessages((messages) => [
+        ...messages,
+        {
+          role: "assistant",
+          content: "Sorry, something went wrong. Please try again.",
+        },
+      ]);
+    } finally {
+      setLoading(false);
+      setLink("");
+      scrollToBottom();
+    }
+  };
+
   const handleKeyDown = (event) => {
     if (event.key === "Enter" && !loading) {
       sendMessage();
@@ -97,8 +139,8 @@ export default function Home() {
         backgroundPosition: "center",
       }}
     >
-      <Button variant='contained' sx={{position:'absolute', top:'10px', left:'10px'}} href='/Data-Set'>Check Data Set</Button>
-      <Typography variant="h4"  >Search For Professor of Your Type</Typography>
+      <Button variant="contained" sx={{ position: 'absolute', top: '10px', left: '10px' }} href='/Data-Set'>Check Data Set</Button>
+      <Typography variant="h4">Search For Professor of Your Type</Typography>
 
       <Stack
         direction="column"
@@ -110,11 +152,11 @@ export default function Home() {
         sx={{
           mx: "auto",
           borderRadius: "16px",
-           backgroundImage: "url('/pic.jpg')",
-           backgroundSize: "cover", 
-           backgroundPosition: "center",
-           boxShadow: " 2px -6px 20px #b9faff;",
-           marginTop:'20px'
+          backgroundImage: "url('/pic.jpg')",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          boxShadow: "2px -6px 20px #b9faff;",
+          marginTop: '20px',
         }}
       >
         <Stack
@@ -123,7 +165,6 @@ export default function Home() {
           flexGrow={1}
           overflow="auto"
           maxHeight="100%"
-          
         >
           {messages.map((message, index) => (
             <Box
@@ -140,7 +181,7 @@ export default function Home() {
                     : "#bde58e"
                 }
                 color="black"
-                borderRadius='25px'
+                borderRadius="25px"
                 p={3}
               >
                 <ReactMarkdown>{message.content}</ReactMarkdown>
@@ -149,6 +190,7 @@ export default function Home() {
           ))}
           <div ref={messagesEndRef} />
         </Stack>
+
         <Stack direction="row" spacing={2}>
           <TextField
             label="Message"
@@ -157,9 +199,7 @@ export default function Home() {
             onChange={(e) => setMessage(e.target.value)}
             onKeyDown={handleKeyDown}
             disabled={loading}
-            sx={{ border:'2px solid white',
-               
-             }} 
+            sx={{ border: '2px solid white' }}
           />
           <Button
             variant="contained"
@@ -168,6 +208,25 @@ export default function Home() {
             aria-label="Send message"
           >
             Send
+          </Button>
+        </Stack>
+
+        <Stack direction="row" spacing={2} marginTop="10px">
+          <TextField
+            label="Professor's RateMyProfessors Link"
+            fullWidth
+            value={link}
+            onChange={(e) => setLink(e.target.value)}
+            disabled={loading}
+            sx={{ border: '2px solid white' }}
+          />
+          <Button
+            variant="contained"
+            onClick={submitLink}
+            disabled={loading}
+            aria-label="Submit link"
+          >
+            Submit Link
           </Button>
         </Stack>
       </Stack>

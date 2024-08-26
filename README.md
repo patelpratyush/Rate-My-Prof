@@ -19,11 +19,11 @@
 
 ## Features
 
-- **Personalized Professor Recommendations**: Get top 3 professor recommendations based on your specific queries.
-- **Comprehensive Review Analysis**: Analyze detailed reviews including teaching style, course difficulty, and grading fairness.
-- **Real-time Chat Interface**: Interact with the AI assistant through a user-friendly chat interface.
-- **Structured and Concise Information**: Receive well-organized summaries to help you make informed decisions.
-- **Privacy and Security**: Handles data securely, without sharing any personal information that isn’t explicitly stated in official reviews.
+- **Personalized Professor Recommendations:** Receive top 3 professor recommendations tailored to your specific queries.
+- **Comprehensive Review Analysis:** Examine detailed reviews, including teaching style, course difficulty, and grading fairness.
+- **Real-time Chat Interface:** Engage with the AI assistant via an intuitive chat interface.
+- **Structured and Concise Information:** Obtain well-organized summaries to aid in making informed decisions.
+- **Privacy and Security:** Ensure data is handled securely, with no personal information shared beyond what's in official reviews.
 
 ## Technology Stack
 
@@ -37,7 +37,7 @@
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/MOHAMMED-IQRAMUL/Rate-My-Professor-Using-RAG.git
+   git clone https://github.com/patelpratyush/Rate-My-Prof.git
    cd Rate-My-Professor-Using-RAG
    ```
 
@@ -71,17 +71,28 @@
 ## Project Structure
 
 ```plaintext
-ProfessAI/
-├── public/                     # Static assets
-├── src/                        # Source files
-│   ├── components/             # React components
-│   ├── pages/                  # Next.js pages
-│   │   ├── api/                # API routes
-│   │   └── index.js            # Main page component
-│   └── styles/                 # CSS and styling files
-├── .env                        # Environment variables
-├── package.json                # Dependencies and scripts
-└── README.md                   # Project documentation
+Rate-My-Professor-Using-RAG/
+├── README.md                  # Project documentation
+├── app
+│   ├── Data-Set               # Data set page
+│   │   └── page.js            # Page component for Data-Set
+│   ├── api                    # API routes
+│   │   ├── chat
+│   │   │   └── route.js      # Route handler for chat API
+│   │   ├── pinecone
+│   │   │   └── route.js      # Route handler for Pinecone API
+│   │   └── scrape
+│   │       └── route.js      # Route handler for scrape API
+│   ├── globals.css            # Global CSS styles
+│   ├── layout.js             # Layout component
+│   └── page.js               # Main page component
+├── load.ipynb                 # Jupyter notebook for loading data
+├── public
+│   ├── OIP.jpeg               # Image file
+│   ├── pic.jpg                # Background image
+│   └── reviews.json           # Reviews data
+├── requirements.txt           # Python dependencies (if any)
+└── reviews.json               # Reviews data (duplicate)
 ```
 
 ## Contributing
