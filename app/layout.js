@@ -4,8 +4,8 @@ import "./globals.css";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
-  title: "RMP-RAG",
-  description: "AI Rate My Professor - using RAG",
+  title: "ProfessAI",
+  description: "Application to help you find your perfect professor",
 };
 
 export default function RootLayout({ children }) {

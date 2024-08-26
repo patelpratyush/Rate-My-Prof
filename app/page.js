@@ -1,235 +1,33 @@
-"use client";
-import { Box, Button, Stack, TextField, Typography } from "@mui/material";
-import { useState, useRef, useEffect } from "react";
-import ReactMarkdown from "react-markdown";
+// app/page.js
+'use client';
+import landingPage from "./landing/page";
+// import signInPage from "./sign-in/[[...sign-in]]/page";
+// import signUpPage from "./sign-up/[[...sign-up]]/page";
+import RMPPage from "./RMP/page";
 
-export default function Home() {
-  const [messages, setMessages] = useState([
-    {
-      role: "assistant",
-      content:
-        "Hello, I am Rate My Professor Support Assistant. How can I help you today?",
-    },
-  ]);
-  const [message, setMessage] = useState("");
-  const [loading, setLoading] = useState(false);
-  const [link, setLink] = useState("");
-  const messagesEndRef = useRef(null);
+import { usePathname } from "next/navigation";
 
-  const sendMessage = async () => {
-    if (message.trim() === "") return; // Prevent sending empty messages
-    setLoading(true);
-    setMessage("");
-    setMessages((messages) => [
-      ...messages,
-      { role: "user", content: message },
-      { role: "assistant", content: "" },
-    ]);
 
-    try {
-      const response = await fetch("/api/chat", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify([...messages, { role: "user", content: message }]),
-      });
+const Page = () => {
+  const pathname = usePathname();
 
-      const reader = response.body.getReader();
-      const decoder = new TextDecoder();
+  if (pathname === "/") {
+    return landingPage();
+  }
 
-      let result = "";
-      await reader.read().then(function processText({ done, value }) {
-        if (done) return result;
+  // if (pathname === "/sign-in") {
+  //   return SignInPage();
+  // }
 
-        const text = decoder.decode(value || new Uint8Array(), {
-          stream: true,
-        });
+  // if (pathname === "/sign-up") {
+  //   return SignUpPage();
+  // }
 
-        setMessages((messages) => {
-          const updatedMessages = [...messages];
-          const lastMessage = updatedMessages[updatedMessages.length - 1];
-          lastMessage.content += text;
-          return updatedMessages;
-        });
+  if (pathname === "/RMP") {
+    return RMP();
+  }
 
-        return reader.read().then(processText);
-      });
-    } catch (error) {
-      console.error("Error fetching data:", error);
-      setMessages((messages) => [
-        ...messages,
-        {
-          role: "assistant",
-          content: "Sorry, something went wrong. Please try again.",
-        },
-      ]);
-    } finally {
-      setLoading(false);
-      scrollToBottom();
-    }
-  };
+  return landingPage();
+};
 
-  const submitLink = async () => {
-    if (link.trim() === "") return; // Prevent sending empty links
-    setLoading(true);
-
-    try {
-      const response = await fetch("/api/scrape", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ data: link }),
-      });
-
-      const data = await response.json();
-      if (response.ok) {
-        setMessages((messages) => [
-          ...messages,
-          { role: "assistant", content: "Professor data successfully added." },
-        ]);
-      } else {
-        setMessages((messages) => [
-          ...messages,
-          { role: "assistant", content: data.error || "Failed to add data." },
-        ]);
-      }
-    } catch (error) {
-      console.error("Error submitting link:", error);
-      setMessages((messages) => [
-        ...messages,
-        {
-          role: "assistant",
-          content: "Sorry, something went wrong. Please try again.",
-        },
-      ]);
-    } finally {
-      setLoading(false);
-      setLink("");
-      scrollToBottom();
-    }
-  };
-
-  const handleKeyDown = (event) => {
-    if (event.key === "Enter" && !loading) {
-      sendMessage();
-    }
-  };
-
-  const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
-  };
-
-  useEffect(() => {
-    scrollToBottom();
-  }, [messages]);
-
-  return (
-    <Box
-      width="100vw"
-      height="100vh"
-      display="flex"
-      flexDirection="column"
-      justifyContent="center"
-      alignItems="center"
-      sx={{
-        backgroundImage: "url('/pic.jpg')",
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-      }}
-    >
-      <Button variant="contained" sx={{ position: 'absolute', top: '10px', left: '10px' }} href='/Data-Set'>Check Data Set</Button>
-      <Typography variant="h4">Search For Professor of Your Type</Typography>
-
-      <Stack
-        direction="column"
-        width="70vw"
-        height="700px"
-        border="2px solid lightblue"
-        p='15px 20px'
-        spacing={3}
-        sx={{
-          mx: "auto",
-          borderRadius: "16px",
-          backgroundImage: "url('/pic.jpg')",
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-          boxShadow: "2px -6px 20px #b9faff;",
-          marginTop: '20px',
-        }}
-      >
-        <Stack
-          direction="column"
-          spacing={2}
-          flexGrow={1}
-          overflow="auto"
-          maxHeight="100%"
-        >
-          {messages.map((message, index) => (
-            <Box
-              key={index}
-              display="flex"
-              justifyContent={
-                message.role === "assistant" ? "flex-start" : "flex-end"
-              }
-            >
-              <Box
-                bgcolor={
-                  message.role === "assistant"
-                    ? "white"
-                    : "#bde58e"
-                }
-                color="black"
-                borderRadius="25px"
-                p={3}
-              >
-                <ReactMarkdown>{message.content}</ReactMarkdown>
-              </Box>
-            </Box>
-          ))}
-          <div ref={messagesEndRef} />
-        </Stack>
-
-        <Stack direction="row" spacing={2}>
-          <TextField
-            label="Message"
-            fullWidth
-            value={message}
-            onChange={(e) => setMessage(e.target.value)}
-            onKeyDown={handleKeyDown}
-            disabled={loading}
-            sx={{ border: '2px solid white' }}
-          />
-          <Button
-            variant="contained"
-            onClick={sendMessage}
-            disabled={loading}
-            aria-label="Send message"
-          >
-            Send
-          </Button>
-        </Stack>
-
-        <Stack direction="row" spacing={2} marginTop="10px">
-          <TextField
-            label="Professor's RateMyProfessors Link"
-            fullWidth
-            value={link}
-            onChange={(e) => setLink(e.target.value)}
-            disabled={loading}
-            sx={{ border: '2px solid white' }}
-          />
-          <Button
-            variant="contained"
-            onClick={submitLink}
-            disabled={loading}
-            aria-label="Submit link"
-          >
-            Submit Link
-          </Button>
-        </Stack>
-      </Stack>
-    </Box>
-  );
-}
+export default Page;

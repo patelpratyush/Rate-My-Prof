@@ -4,7 +4,8 @@
 
 # ProfessAI
 
-**ProfessAI** is an AI-powered assistant designed to help students find the best professors based on their specific needs and preferences. Leveraging a Retrieval-Augmented Generation (RAG) system, ProfessAI analyzes a comprehensive database of professor reviews to provide concise, relevant, and personalized recommendations, streamlining the decision-making process for students.
+**ProfessAI **is an AI-powered assistant designed to help students find the best professors based on their specific needs and preferences. Leveraging a Retrieval-Augmented Generation (RAG) system, ProfessAI analyzes a comprehensive database of professor reviews to provide concise, relevant, and personalized recommendations, streamlining the decision-making process for students.
+
 
 ## Table of Contents
 
@@ -19,11 +20,14 @@
 
 ## Features
 
-- **Personalized Professor Recommendations:** Receive top 3 professor recommendations tailored to your specific queries.
-- **Comprehensive Review Analysis:** Examine detailed reviews, including teaching style, course difficulty, and grading fairness.
-- **Real-time Chat Interface:** Engage with the AI assistant via an intuitive chat interface.
-- **Structured and Concise Information:** Obtain well-organized summaries to aid in making informed decisions.
-- **Privacy and Security:** Ensure data is handled securely, with no personal information shared beyond what's in official reviews.
+**Personalized Professor Recommendations:** Receive top 3 professor recommendations tailored to your specific queries.
+**Comprehensive Review Analysis:** Examine detailed reviews, including teaching style, course difficulty, and grading fairness.
+**Real-time Chat Interface: Engage with the AI assistant via an intuitive chat interface.
+Structured and Concise Information:** Obtain well-organized summaries to aid in making informed decisions.
+**Privacy and Security:** Ensure data is handled securely, with no personal information shared beyond what's in official reviews.
+**User-Submitted Reviews:** Add and manage your own professor reviews through a user-friendly interface.
+**Advanced Search Capabilities:** Search for professors by various criteria, including name, department, and subject.
+**Review Filtering and Sorting:** Filter and sort reviews based on stars, subject, or department to find the best matches quickly.
 
 ## Technology Stack
 
@@ -76,6 +80,8 @@ Rate-My-Professor-Using-RAG/
 ├── app
 │   ├── Data-Set               # Data set page
 │   │   └── page.js            # Page component for Data-Set
+│   ├── RMP                    # Rate My Professor page
+│   │   └── page.js            # Page component for RMP
 │   ├── api                    # API routes
 │   │   ├── chat
 │   │   │   └── route.js      # Route handler for chat API
@@ -84,9 +90,12 @@ Rate-My-Professor-Using-RAG/
 │   │   └── scrape
 │   │       └── route.js      # Route handler for scrape API
 │   ├── globals.css            # Global CSS styles
+│   ├── landing                # Landing page
+│   │   └── page.js            # Page component for Landing page
 │   ├── layout.js             # Layout component
 │   └── page.js               # Main page component
 ├── load.ipynb                 # Jupyter notebook for loading data
+├── middleware.ts             # Middleware configuration
 ├── public
 │   ├── OIP.jpeg               # Image file
 │   ├── pic.jpg                # Background image
