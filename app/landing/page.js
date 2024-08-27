@@ -243,7 +243,7 @@ const LandingPage = () => {
         </Container>
       </Box>
 
-      <Container sx={{ py: 8, background: '#1c1c1c' }}>
+      <Container sx={{ py: 8, background: '#1c1c1c' }} maxWidth={false}>
         <Grid container spacing={4}>
           {features.map((feature, index) => (
             <FeatureCard
