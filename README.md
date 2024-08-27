@@ -4,8 +4,7 @@
 
 # ProfessAI
 
-**ProfessAI **is an AI-powered assistant designed to help students find the best professors based on their specific needs and preferences. Leveraging a Retrieval-Augmented Generation (RAG) system, ProfessAI analyzes a comprehensive database of professor reviews to provide concise, relevant, and personalized recommendations, streamlining the decision-making process for students.
-
+**ProfessAI**is an AI-powered assistant designed to help students find the best professors based on their specific needs and preferences. Leveraging a Retrieval-Augmented Generation (RAG) system, ProfessAI analyzes a comprehensive database of professor reviews to provide concise, relevant, and personalized recommendations, streamlining the decision-making process for students.
 
 ## Table of Contents
 
@@ -22,7 +21,7 @@
 
 **Personalized Professor Recommendations:** Receive top 3 professor recommendations tailored to your specific queries.
 **Comprehensive Review Analysis:** Examine detailed reviews, including teaching style, course difficulty, and grading fairness.
-**Real-time Chat Interface: Engage with the AI assistant via an intuitive chat interface.
+**Real-time Chat Interface:** Engage with the AI assistant via an intuitive chat interface.
 Structured and Concise Information:** Obtain well-organized summaries to aid in making informed decisions.
 **Privacy and Security:** Ensure data is handled securely, with no personal information shared beyond what's in official reviews.
 **User-Submitted Reviews:** Add and manage your own professor reviews through a user-friendly interface.
@@ -40,25 +39,30 @@ Structured and Concise Information:** Obtain well-organized summaries to aid in 
 ## Installation
 
 1. **Clone the repository**
+
    ```bash
    git clone https://github.com/patelpratyush/Rate-My-Prof.git
    cd Rate-My-Professor-Using-RAG
    ```
 
 2. **Install dependencies**
+
    ```bash
    npm install
    ```
 
 3. **Set up environment variables**
    Create a `.env` file in the root directory and add the following:
+
    ```env
    PINECONE_API_KEY=your-pinecone-api-key
    GEMINI_API_KEY=your-gemini-api-key
    OPENROUTER_API_KEY=your-openrouter-api-key
+   OPENAI_API_KEY=your-openai-api-key
    ```
 
 4. **Run the application**
+
    ```bash
    npm run dev
    ```
@@ -110,17 +114,23 @@ We welcome contributions from the community! To contribute:
 
 1. **Fork the repository**
 2. **Create a new branch**
+
    ```bash
    git checkout -b feature-your-feature-name
    ```
+
 3. **Make your changes and commit them**
+
    ```bash
    git commit -m "Add your message here"
    ```
+
 4. **Push to the branch**
+
    ```bash
    git push origin feature-your-feature-name
    ```
+
 5. **Open a Pull Request**: We will review your changes and merge them into the main branch.
 
 ## License
@@ -134,4 +144,5 @@ For questions or support, please contact:
 - **GitHub**: [your-username](https://github.com/MOHAMMED-IQRAMUL)
 
 ---
+
 # Rate-My-Prof
