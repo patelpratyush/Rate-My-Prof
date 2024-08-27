@@ -1,3 +1,4 @@
+// app/landing/page.js
 'use client';
 import AddIcon from '@mui/icons-material/Add';
 import AssistantIcon from '@mui/icons-material/Assistant';
@@ -5,8 +6,8 @@ import AutoAwesomeIcon from '@mui/icons-material/AutoAwesome';
 import MenuIcon from '@mui/icons-material/Menu';
 import SearchIcon from '@mui/icons-material/Search';
 import {
-    AppBar, Box, Button, Card, CardContent, Container, Dialog, DialogActions, DialogContent, DialogTitle,
-    Grid, IconButton, InputLabel, Menu, MenuItem, TextField, Toolbar, Typography, useMediaQuery, useTheme
+  AppBar, Box, Button, Card, CardContent, Container, Dialog, DialogActions, DialogContent, DialogTitle,
+  Grid, IconButton, InputLabel, Menu, MenuItem, TextField, Toolbar, Typography, useMediaQuery, useTheme
 } from '@mui/material';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
@@ -141,7 +142,7 @@ const LandingPage = () => {
                 sx={{ '& .MuiPaper-root': { backgroundColor: '#121212' } }}
               >
                 <MenuItem onClick={handleRMP} component="a" href="#" sx={{ color: 'white' }}>Explore Professors</MenuItem>
-                <MenuItem onClick={handleClickOpen} sx={{ color: 'white' }}>Add Teacher</MenuItem>
+                <MenuItem onClick={handleDataSet} sx={{ color: 'white' }}>Add Teacher</MenuItem>
               </Menu>
             </>
           ) : (
@@ -164,7 +165,7 @@ const LandingPage = () => {
                 Explore Professors
               </Button>
               <Button
-                onClick={handleClickOpen}
+                onClick={handleDataSet}
                 variant="outlined"
                 sx={{
                   borderColor: '#9a9a9a',
